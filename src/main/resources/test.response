@@ -1,0 +1,34 @@
+view:
+  elements:
+    - type: textfield
+      id: name
+    - type: textfield
+      id: age
+    - type: textfield
+      id: test
+    - type: button
+      id: submit
+script: >
+  function onNameExit() {
+    ui.setFocus('age');
+  }
+
+  function onAgeExit() {
+    if (!model.getValue('age')) {
+      ui.setFocus('age');
+      util.log('age not yet filled');
+    } else {
+      util.log('age is set');
+      ui.setFocus('test');
+    }
+  }
+
+  function onTestExit() {
+    if (model.getValue('test') == 'hello') {
+      ui.showMessage('hello: ' + model.getValue('name'));
+    }
+  }
+
+  function onSubmitPressed() {
+    ui.showMessage('Saved');
+  }
